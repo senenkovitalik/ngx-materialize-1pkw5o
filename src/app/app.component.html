@@ -10,11 +10,43 @@
 </mz-input-container>
 
 <mz-collection>
-  <mz-collection-item [avatar]="true">
-    Collection item 1
-    <div mz-secondary-content>Actions</div>
+  <mz-collection-item *ngFor="let user of users" [avatar]="true" (click)="expandUserInfo($event, user)">
+    <!-- Info -->
+    <i mz-avatar class="material-icons">account_circle</i>
+    <div class="title teal-text text-darken-3">{{user.username}}</div>
+    <div class="teal-text text-darken-4">{{user.description}}, {{user.comment}}</div>
+
+    <!-- Hidden info -->
+    <div *ngIf="expandedUser && user.username === expandedUser.username">
+      <password-field [password]="user.password"></password-field>
+      <div class="teal-text text-darken-4">Создан: {{user.createdAt}}</div>
+      <div class="teal-text text-darken-4">Обновлен: {{user.updatedAt}}</div>
+    </div>
+
+    <!-- Actions -->
+    <div mz-secondary-content class="actions" (click)="stopPropagation($event)">
+      <button class="btn-flat" style="padding-right: 1rem;" (click)="showModal(user)">
+        <i class="material-icons red-text icon-size">delete</i>
+      </button>
+      <button class="btn-flat" style="padding: 0;" (click)="editUser(user)">
+        <i class="material-icons orange-text icon-size">mode_edit</i>
+      </button>
+      <mz-switch-container (change)="lockUser($event, user)">
+        <input [checked]="user.isActive" mz-switch type="checkbox">
+      </mz-switch-container>
+    </div>
   </mz-collection-item>
-  <mz-collection-item>Collection item 2</mz-collection-item>
-  <mz-collection-item>Collection item 3</mz-collection-item>
-  <mz-collection-item>Collection item 4</mz-collection-item>
 </mz-collection>
+
+<mz-modal #modal>
+  <mz-modal-header>
+    <h4>Удалить аккаунт?</h4>
+  </mz-modal-header>
+  <mz-modal-content>
+    Вы уверенны что хотите удалить учётную запись пользователя <b>{{userToDelete ? userToDelete.username : ''}}</b>?
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button class="btn-flat red-text" style="padding: 0;" mz-modal-close (click)="deleteUser()">УДАЛИТЬ</button>
+    <button class="btn-flat teal-text" mz-modal-close>ОТМЕНА</button>
+  </mz-modal-footer>
+</mz-modal>
