@@ -1,44 +1,49 @@
-<label for="username" class="teal-text text-darken-3">Username</label>
-<input placeholder="Username" id="username" type="text">
+<div class="row">
+	<div class="col s12 l8 offset-l2">
+		<label for="username" class="teal-text text-darken-3">Username</label>
+		<input placeholder="Username" id="username" type="text">
 
-<mz-collection>
-  <mz-collection-item *ngFor="let user of users" [avatar]="true" (click)="expandUserInfo($event, user)">
-    <!-- Info -->
-    <i mz-avatar class="custom-avatar">{{user.username.charAt(0) | uppercase}}</i>
-    <div class="title teal-text text-darken-3">{{user.username}}</div>
-    <div class="teal-text text-darken-4">{{user.description}}, {{user.comment}}</div>
+		<mz-collection>
+			<mz-collection-item *ngFor="let user of users" [avatar]="true" (click)="expandUserInfo($event, user)">
+				<!-- Info -->
+				<i mz-avatar class="custom-avatar">{{user.username.charAt(0) | uppercase}}</i>
+				<div class="title teal-text text-darken-3">{{user.username}}</div>
+				<div class="teal-text text-darken-4">{{user.description}}, {{user.comment}}</div>
 
-    <!-- Hidden info -->
-    <div *ngIf="expandedUser && user.username === expandedUser.username">
-      <password-field [password]="user.password"></password-field>
-      <div class="teal-text text-darken-4">Создан: {{user.createdAt}}</div>
-      <div class="teal-text text-darken-4">Обновлен: {{user.updatedAt}}</div>
-    </div>
+				<!-- Hidden info -->
+				<div *ngIf="expandedUser && user.username === expandedUser.username">
+					<password-field [password]="user.password"></password-field>
+					<div class="teal-text text-darken-4">Создан: {{user.createdAt}}</div>
+					<div class="teal-text text-darken-4">Обновлен: {{user.updatedAt}}</div>
+				</div>
 
-    <!-- Actions -->
-    <div mz-secondary-content class="actions" (click)="stopPropagation($event)">
-      <button class="btn-flat" style="padding-right: 1rem;" (click)="showModal(user)">
-        <i class="material-icons red-text text-lighten-2 action-icon delete">delete</i>
-      </button>
-      <button class="btn-flat" style="padding: 0;" (click)="editUser(user)">
-        <i class="material-icons orange-text text-lighten-2 action-icon edit">mode_edit</i>
-      </button>
-      <mz-switch-container (change)="lockUser($event, user)">
-        <input [checked]="user.isActive" mz-switch type="checkbox">
-      </mz-switch-container>
-    </div>
-  </mz-collection-item>
-</mz-collection>
+				<!-- Actions -->
+				<div mz-secondary-content class="actions" (click)="stopPropagation($event)">
+					<button class="btn-flat" style="padding-right: 1rem;" (click)="showModal(user)" title="Удалить">
+            <i class="material-icons grey-text text-lighten-1 action-icon delete">delete</i>
+          </button>
+					<a class="btn-flat" style="padding: 0;" (click)="editUser(user)" title="Редактировать">
+            <i class="material-icons grey-text text-lighten-1 action-icon edit">mode_edit</i>
+          </a>
+					<mz-switch-container (change)="lockUser($event, user)" title="{{user.isActive ? 'Блокировать' : 'Активировать'}}">
+						<input [checked]="user.isActive" mz-switch type="checkbox">
+          </mz-switch-container>
+				</div>
+			</mz-collection-item>
+		</mz-collection>
 
-<mz-modal #modal>
-  <mz-modal-header>
-    <h4>Удалить аккаунт?</h4>
-  </mz-modal-header>
-  <mz-modal-content>
-    Вы уверенны что хотите удалить учётную запись пользователя <b>{{userToDelete ? userToDelete.username : ''}}</b>?
-  </mz-modal-content>
-  <mz-modal-footer>
-    <button class="btn-flat red-text" style="padding: 0;" mz-modal-close (click)="deleteUser()">УДАЛИТЬ</button>
-    <button class="btn-flat teal-text" mz-modal-close>ОТМЕНА</button>
-  </mz-modal-footer>
-</mz-modal>
+		<mz-modal #modal>
+			<mz-modal-header>
+				<h4>Удалить аккаунт?</h4>
+			</mz-modal-header>
+			<mz-modal-content>
+				Вы уверенны что хотите удалить учётную запись пользователя
+				<b>{{userToDelete ? userToDelete.username : ''}}</b>?
+			</mz-modal-content>
+			<mz-modal-footer>
+				<button class="btn-flat red-text" style="padding: 0;" mz-modal-close (click)="deleteUser()">УДАЛИТЬ</button>
+				<button class="btn-flat teal-text" mz-modal-close>ОТМЕНА</button>
+			</mz-modal-footer>
+		</mz-modal>
+	</div>
+</div>
