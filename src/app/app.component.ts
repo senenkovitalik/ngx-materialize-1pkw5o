@@ -21,6 +21,15 @@ export class AppComponent  {
       updatedAt: '04.02.2019'
     },
     {
+      username: 'Vladimir',
+      description: 'Worker',
+      comment: 'Work all day long',
+      password: '734gfg87g34',
+      isActive: true,
+      createdAt: '01.05.2018',
+      updatedAt: '04.02.2019'
+    },
+    {
       username: 'Nelya',
       description: 'Reception',
       comment: 'Stupid bitch',
@@ -49,8 +58,14 @@ export class AppComponent  {
     },
   ];
 
+  private filteredUsers: UserModel[] = this.users;
   private expandedUser: UserModel;
   private userToDelete: UserModel;
+
+  private filterUsers(name: string): void {
+    const regexp = new RegExp(`^${name}.*$`);
+    this.filteredUsers = this.users.filter(({username}) => regexp.test(username));
+  }
 
   private expandUserInfo($event, user) {
     this.expandedUser = this.expandedUser === user ? null : user;

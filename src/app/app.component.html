@@ -1,10 +1,12 @@
 <div class="row">
 	<div class="col s12 l8 offset-l2">
 		<label for="username" class="teal-text text-darken-3">Username</label>
-		<input placeholder="Username" id="username" type="text">
+		<input #username placeholder="Username" id="username" type="text"
+     (input)="filterUsers(username.value)"/>
 
-		<mz-collection *ngIf="users.length">
-			<mz-collection-item *ngFor="let user of users" [avatar]="true" (click)="expandUserInfo($event, user)">
+		<mz-collection *ngIf="filteredUsers.length">
+			<mz-collection-item *ngFor="let user of filteredUsers" [avatar]="true"
+       (click)="expandUserInfo($event, user)">
 				<!-- Info -->
 				<i mz-avatar class="custom-avatar">{{user.username.charAt(0) | uppercase}}</i>
 				<div class="title teal-text text-darken-3">{{user.username}}</div>
