@@ -3,7 +3,7 @@
 		<label for="username" class="teal-text text-darken-3">Username</label>
 		<input placeholder="Username" id="username" type="text">
 
-		<mz-collection>
+		<mz-collection *ngIf="users.length">
 			<mz-collection-item *ngFor="let user of users" [avatar]="true" (click)="expandUserInfo($event, user)">
 				<!-- Info -->
 				<i mz-avatar class="custom-avatar">{{user.username.charAt(0) | uppercase}}</i>
