@@ -19,10 +19,10 @@
 
 				<!-- Actions -->
 				<div mz-secondary-content class="actions" (click)="stopPropagation($event)">
-					<button class="btn-flat" style="padding-right: 1rem;" (click)="showModal(user)" title="Удалить">
+					<button class="btn-flat" style="padding: 0 0.5rem" (click)="showModal(user)" title="Удалить">
             <i class="material-icons grey-text text-lighten-1 action-icon delete">delete</i>
           </button>
-					<a class="btn-flat" style="padding: 0;" (click)="editUser(user)" title="Редактировать">
+					<a class="btn-flat" style="padding: 0 0.5rem" (click)="editUser(user)" title="Редактировать">
             <i class="material-icons grey-text text-lighten-1 action-icon edit">mode_edit</i>
           </a>
 					<mz-switch-container (change)="lockUser($event, user)" title="{{user.isActive ? 'Блокировать' : 'Активировать'}}">
