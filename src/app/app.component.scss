@@ -1,8 +1,21 @@
+.custom-avatar {
+  font-style: normal;
+  background-color: #e0e0e0 !important;
+}
+
 .actions {
   display: flex;
   align-items: center;
 }
 
-.icon-size {
+.action-icon {
   font-size: 2.3rem;
+}
+
+.delete:hover {
+  color: #f44336 !important;
+}
+
+.edit:hover {
+  color: #ff9800 !important;
 }

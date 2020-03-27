@@ -1,18 +1,10 @@
-<mz-input-container>
-  <i mz-icon-mdi mz-input-prefix
-    [icon]="'email'">
-  </i>
-  <input mz-input
-    [label]="'Username'"
-    id="username-input"
-    placeholder="Enter username"
-    type="text">
-</mz-input-container>
+<label for="username" class="teal-text text-darken-3">Username</label>
+<input placeholder="Username" id="username" type="text">
 
 <mz-collection>
   <mz-collection-item *ngFor="let user of users" [avatar]="true" (click)="expandUserInfo($event, user)">
     <!-- Info -->
-    <i mz-avatar class="material-icons">account_circle</i>
+    <i mz-avatar class="custom-avatar">{{user.username.charAt(0) | uppercase}}</i>
     <div class="title teal-text text-darken-3">{{user.username}}</div>
     <div class="teal-text text-darken-4">{{user.description}}, {{user.comment}}</div>
 
@@ -26,10 +18,10 @@
     <!-- Actions -->
     <div mz-secondary-content class="actions" (click)="stopPropagation($event)">
       <button class="btn-flat" style="padding-right: 1rem;" (click)="showModal(user)">
-        <i class="material-icons red-text icon-size">delete</i>
+        <i class="material-icons red-text text-lighten-2 action-icon delete">delete</i>
       </button>
       <button class="btn-flat" style="padding: 0;" (click)="editUser(user)">
-        <i class="material-icons orange-text icon-size">mode_edit</i>
+        <i class="material-icons orange-text text-lighten-2 action-icon edit">mode_edit</i>
       </button>
       <mz-switch-container (change)="lockUser($event, user)">
         <input [checked]="user.isActive" mz-switch type="checkbox">
